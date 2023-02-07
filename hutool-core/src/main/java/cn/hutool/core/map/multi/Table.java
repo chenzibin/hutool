@@ -31,7 +31,7 @@ public interface Table<R, C, V> extends Iterable<Table.Cell<R, C, V>> {
 	 * @return 是否包含映射
 	 */
 	default boolean contains(R rowKey, C columnKey) {
-		return Opt.ofNullable(getRow(rowKey)).map((map) -> map.containsKey(columnKey)).get();
+		return Opt.ofNullable(getRow(rowKey)).map((map) -> map.containsKey(columnKey)).orElse(false);
 	}
 
 	//region Row
@@ -43,7 +43,7 @@ public interface Table<R, C, V> extends Iterable<Table.Cell<R, C, V>> {
 	 * @return 行是否存在
 	 */
 	default boolean containsRow(R rowKey) {
-		return Opt.ofNullable(rowMap()).map((map) -> map.containsKey(rowKey)).get();
+		return Opt.ofNullable(rowMap()).map((map) -> map.containsKey(rowKey)).orElse(false);
 	}
 
 	/**
